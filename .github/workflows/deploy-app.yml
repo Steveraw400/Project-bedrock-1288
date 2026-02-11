@@ -31,4 +31,4 @@ jobs:
       - name: Deploy manifests
         run: |
           kubectl get ns $NAMESPACE || kubectl create ns $NAMESPACE
-          kubectl apply -n $NAMESPACE -f ingress.yaml
+          kubectl apply -n $NAMESPACE -f ingress/ingress.yaml
