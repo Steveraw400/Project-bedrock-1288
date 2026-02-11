@@ -34,9 +34,12 @@ jobs:
 
       - name: Deploy manifests
         run: |
+          ls -la
+          ls -la K8s || true
           kubectl apply -f K8s/
+          kubectl rollout status deploy/retail-store-ui-ci -n "${NAMESPACE}" --timeout=180s
           kubectl get pods -n "${NAMESPACE}" -o wide
           kubectl get svc -n "${NAMESPACE}" -o wide
           kubectl get ingress -n "${NAMESPACE}" -o wide
-          - run: ls -la
+
 
