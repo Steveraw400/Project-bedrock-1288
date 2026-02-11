@@ -34,12 +34,15 @@ jobs:
 
       - name: Deploy manifests
         run: |
-          ls -la
-          ls -la K8s || true
-          kubectl apply -f K8s/
+          # Apply only Kubernetes application manifests (NOT RBAC/aws-auth/patch files)
+          kubectl apply -f K8s/ui-deployment.yaml -n "${NAMESPACE}"
+          kubectl apply -f K8s/ui-service.yaml -n "${NAMESPACE}"
+          kubectl apply -f K8s/ingress.yaml -n "${NAMESPACE}"
+
           kubectl rollout status deploy/retail-store-ui-ci -n "${NAMESPACE}" --timeout=180s
           kubectl get pods -n "${NAMESPACE}" -o wide
           kubectl get svc -n "${NAMESPACE}" -o wide
           kubectl get ingress -n "${NAMESPACE}" -o wide
+
 
 
