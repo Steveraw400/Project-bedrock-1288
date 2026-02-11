@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: retail-store-ui
+  name: retail-store-ui-ci
   namespace: retail-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: retail-store-ui
+      app: retail-store-ui-ci
   template:
     metadata:
       labels:
-        app: retail-store-ui
+        app: retail-store-ui-ci
     spec:
       containers:
         - name: ui

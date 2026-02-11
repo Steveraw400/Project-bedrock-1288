@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: retail-store-ui-ingress
+  name: retail-store-ui-ci
   namespace: retail-app
   annotations:
     kubernetes.io/ingress.class: alb
@@ -16,6 +16,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: retail-store-ui
+                name: retail-store-ui-ci
                 port:
                   number: 80
