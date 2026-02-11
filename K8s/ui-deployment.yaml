@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: retail-store-ui
+  namespace: retail-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: retail-store-ui
+  template:
+    metadata:
+      labels:
+        app: retail-store-ui
+    spec:
+      containers:
+        - name: ui
+          image: public.ecr.aws/nginx/nginx:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 20
