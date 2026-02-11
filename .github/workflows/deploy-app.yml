@@ -3,7 +3,6 @@ name: Deploy App to EKS
 on:
   push:
     branches: ["main"]
-  workflow_dispatch:
 
 env:
   AWS_REGION: us-east-1
@@ -15,20 +14,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: aws-actions/configure-aws-credentials@v4
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - uses: azure/setup-kubectl@v4
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
+        run: |
+          aws eks update-kubeconfig --name "${EKS_CLUSTER_NAME}" --region "${AWS_REGION}"
+          kubectl get nodes
 
       - name: Deploy manifests
         run: |
-          kubectl get ns $NAMESPACE || kubectl create ns $NAMESPACE
-          kubectl apply -n $NAMESPACE -f ingress/ingress.yaml
+          kubectl apply -f k8s/
+          kubectl get pods -n "${NAMESPACE}" -o wide
+          kubectl get svc -n "${NAMESPACE}" -o wide
+          kubectl get ingress -n "${NAMESPACE}" -o wide
