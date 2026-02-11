@@ -1,0 +1,5 @@
+spec:
+  selector:
+    app.kubernetes.io/component: service
+    app.kubernetes.io/instance: retail-store
+    app.kubernetes.io/name: ui
