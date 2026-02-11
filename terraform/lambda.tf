@@ -30,7 +30,7 @@ resource "aws_lambda_function" "asset_processor" {
   function_name = "bedrock-asset-processor"
   filename      = data.archive_file.asset_processor_zip.output_path
   role          = aws_iam_role.lambda_role.arn
-  handler       = "index.handler"
+  handler       = "index.lambda_handler"
   runtime       = "python3.11"
 
   source_code_hash = data.archive_file.asset_processor_zip.output_base64sha256
