@@ -34,7 +34,9 @@ jobs:
 
       - name: Deploy manifests
         run: |
-          kubectl apply -f k8s/
+          kubectl apply -f K8s/
           kubectl get pods -n "${NAMESPACE}" -o wide
           kubectl get svc -n "${NAMESPACE}" -o wide
           kubectl get ingress -n "${NAMESPACE}" -o wide
+          - run: ls -la
+
