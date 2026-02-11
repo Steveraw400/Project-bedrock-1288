@@ -1,0 +1,34 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: bedrock-dev-view-view
+subjects:
+- kind: User
+  name: arn:aws:iam::911224332456:user/bedrock-dev-view
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: view
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: bedrock-dev-view-nodes-read
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["get","list","watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: bedrock-dev-view-nodes-read
+subjects:
+- kind: User
+  name: arn:aws:iam::911224332456:user/bedrock-dev-view
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: bedrock-dev-view-nodes-read
+  apiGroup: rbac.authorization.k8s.io
