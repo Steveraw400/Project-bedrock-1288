@@ -41,5 +41,24 @@ This project deploys a production-style microservices application (**retail-stor
 
 ## Repository Structure (example)
 
+.github/workflows/
+terraform.yml
+deployment-app.yml
+terraform/
+backend.tf
+locals.tf
+vpc.tf
+eks.tf
+iam.tf
+s3.tf
+lambda.tf
+observability.tf
+outputs.tf
+k8s/
+ui-ingress.yaml
+
+
+
+
 
 
