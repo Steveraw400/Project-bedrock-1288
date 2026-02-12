@@ -32,20 +32,20 @@ See `architecture-diagram.png` (or draw.io link) in the repo for visual.
 
 ### Repository Structure
 * terraform/                  # IaC – VPC, EKS, S3, Lambda, add-ons
- main.tf
- provider.tf
- outputs.tf
- backend.tf
- variables.tf
+ -main.tf
+ -provider.tf
+ -outputs.tf
+ -backend.tf
+ -variables.tf
 
 lambda/                     # Lambda function code
-   index.py
-   kubernetes/                 # Helm values (if customized)
+  -index.py
+  -kubernetes/                 # Helm values (if customized)
   values-retail.yaml      # optional overrides
 .github/workflows/          # CI/CD pipeline
-   terraform.yml
-   grading.json                # Terraform outputs for grading script
-   README.md
+   -terraform.yml
+   -grading.json                # Terraform outputs for grading script
+   -README.md
 
 
 ### Prerequisites
@@ -102,7 +102,7 @@ Access credentials for bedrock-dev-view → stored securely in submission docume
 
 This project uses **GitHub Actions** for automated Terraform execution.
 
-**Workflow file**: `.github/workflows/terraform.yml`
+**Workflow file**: `.github/workflows/terraform.yaml,deployment-app.yaml`
 
 **Triggers & Steps**:
 
@@ -168,6 +168,7 @@ terraform force-unlock <LOCK_ID>
  Container logs flowing via amazon-cloudwatch-observability add-on
  grading.json committed in repo root
  Developer IAM user + RBAC view access verified
+
 
 
 
