@@ -31,21 +31,21 @@ This repository contains the complete infrastructure and deployment code for **P
 See `architecture-diagram.png` (or draw.io link) in the repo for visual.
 
 ### Repository Structure
-├── terraform/                  # IaC – VPC, EKS, S3, Lambda, add-ons
-│   ├── main.tf
-│   ├── provider.tf
-│   ├── outputs.tf
-│   ├── backend.tf
-│   ├── variables.tf
-│   └── ...
-├── lambda/                     # Lambda function code
-│   └── index.py
-├── kubernetes/                 # Helm values (if customized)
-│   └── values-retail.yaml      # optional overrides
-├── .github/workflows/          # CI/CD pipeline
-│   └── terraform.yml
-├── grading.json                # Terraform outputs for grading script
-└── README.md
+* terraform/                  # IaC – VPC, EKS, S3, Lambda, add-ons
+ main.tf
+ provider.tf
+ outputs.tf
+ backend.tf
+ variables.tf
+
+lambda/                     # Lambda function code
+   index.py
+   kubernetes/                 # Helm values (if customized)
+  values-retail.yaml      # optional overrides
+.github/workflows/          # CI/CD pipeline
+   terraform.yml
+   grading.json                # Terraform outputs for grading script
+   README.md
 
 
 ### Prerequisites
@@ -138,7 +138,7 @@ Access Key ID:     AKIAXXXXXXXXXXXXXXXX
 Secret Access Key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Test commands (using temporary AWS profile):
-Bashaws configure --profile bedrock-dev-view
+aws configure --profile bedrock-dev-view
 # Enter above keys + region us-east-1
 
 aws eks update-kubeconfig --name project-bedrock-cluster --region us-east-1 --profile bedrock-dev-view
@@ -168,6 +168,7 @@ terraform force-unlock <LOCK_ID>
  Container logs flowing via amazon-cloudwatch-observability add-on
  grading.json committed in repo root
  Developer IAM user + RBAC view access verified
+
 
 
 
