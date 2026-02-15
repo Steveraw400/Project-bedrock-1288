@@ -16,6 +16,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: retail-store-ui-ci
+                name: ui
                 port:
                   number: 80

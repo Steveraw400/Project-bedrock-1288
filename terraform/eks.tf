@@ -12,21 +12,16 @@ module "eks" {
   cluster_endpoint_public_access       = true
   cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]
 
-  cluster_enabled_log_types = [
-    "api",
-    "audit",
-    "authenticator",
-    "controllerManager",
-    "scheduler"
-  ]
+  cluster_enabled_log_types =[]
+  
 
   enable_irsa = true
 
   eks_managed_node_groups = {
     default = {
       min_size       = 2
-      max_size       = 4
-      desired_size   = 2
+      max_size       = 3
+      desired_size   = 4
       instance_types = ["t3.medium"]
 
       tags = local.tags
